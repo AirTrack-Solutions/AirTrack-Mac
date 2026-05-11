@@ -1,0 +1,53 @@
+<!--
+  AirTrack 1.0.0
+  Copyright (c) 2025 Trevor (“Subhuti”). All rights reserved.
+  SPDX-License-Identifier: LicenseRef-AirTrack-Proprietary-NC
+-->
+
+-->
+
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Settings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/themes.css') }}?v={{ cache_bust }}">
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Admin Settings</h2>
+
+        <form method="POST" action="{{ url_for('admin.save_settings') }}">
+            <div class="mb-3">
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" class="form-control" value="{{ settings['FirstName'] or '' }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" class="form-control" value="{{ settings['LastName'] or '' }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="callsign">Callsign:</label>
+                <input type="text" id="callsign" name="callsign" class="form-control" value="{{ settings['Callsign'] or '' }}" maxlength="9" placeholder="Optional">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Settings</button>
+            <a href="{{ url_for('admin.admin_dashboard') }}" class="btn btn-secondary">Back</a>
+        </form>
+    </div>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/theme_loader.js') }}"></script>
+</body>
+</html>

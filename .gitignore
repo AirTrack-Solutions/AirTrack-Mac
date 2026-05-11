@@ -1,0 +1,164 @@
+# ---------------------------------------------------------
+
+# AirTrack .gitignore (macOS)
+
+# ---------------------------------------------------------
+
+# ---------------------------
+
+# Environment / configuration
+
+# ---------------------------
+
+.env
+.env.*
+!.env.example
+.env.client
+.env.server
+
+# Local workspace files
+
+AirTrack1.code-workspace
+.vscode/
+.idea/
+
+# ---------------------------
+
+# SSH material
+
+# ---------------------------
+
+ssh/
+ssh/*
+
+# ---------------------------
+
+# Keys (server only)
+
+# ---------------------------
+
+license.lic
+keys/
+keys/*
+!keys/airtrack_public.pem
+
+# ---------------------------
+
+# Python artifacts
+
+# ---------------------------
+
+**pycache**/
+*.pyc
+*.pyo
+*.pyd
+*.pytest_cache/
+*.coverage
+.mypy_cache/
+
+# Virtual environments
+
+venv/
+.venv/
+env/
+
+# ---------------------------
+
+# Logs / backups
+
+# ---------------------------
+
+logs/
+logs/*
+*.log
+
+backups/
+app/backup.sql
+
+# ---------------------------
+
+# Databases
+
+# ---------------------------
+
+*.db
+*.sqlite
+*.sqlite3
+
+# ---------------------------
+
+# OS junk
+
+# ---------------------------
+
+.DS_Store
+Thumbs.db
+
+# ---------------------------
+
+# Development junk
+
+# ---------------------------
+
+MASTER.txt
+*.bak
+*.patch
+*.csv
+*audit*
+tree.txt
+update_headers.py
+
+# ---------------------------
+
+# Docker overrides
+
+# ---------------------------
+
+docker-compose.override.yml
+
+# ---------------------------
+
+# Local runtime data
+
+# ---------------------------
+
+app/app_data/
+app/config/*.lic
+app_data/
+
+# ---------------------------
+
+# Update system cache
+
+# ---------------------------
+
+app/static/updates/
+app/static/uploads/
+
+# ---------------------------
+
+# Scripts not for clients
+
+# ---------------------------
+
+app/scripts/
+
+# ---------------------------
+
+# Large aircraft registries
+
+# ---------------------------
+
+app/registries/
+
+# ---------------------------
+
+# Temporary exports
+
+# ---------------------------
+
+exports/
+tmp/
+*.tmp
+
+app/static/uploads/

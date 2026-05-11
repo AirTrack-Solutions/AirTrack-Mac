@@ -1,0 +1,112 @@
+<!--
+  AirTrack 1.0.0
+  Copyright (c) 2025 Trevor ("Subhuti"). All rights reserved.
+  SPDX-License-Identifier: LicenseRef-AirTrack-Proprietary-NC
+-->
+<!-- AirTrack Header — Corrected Layout -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<div class="header-container">
+
+    <!-- ================= TOP ROW ================= -->
+    <div class="header-top">
+
+        <!-- Left: Title -->
+        <div class="header-left">
+            <h1 class="header-title">AirTrack Logbook</h1>
+            <div class="header-version">Ver 1.0.0 (Wilbur - R300)</div>
+        </div>
+
+        <div class="callsign-banner">
+            {{ settings.get('Callsign','') if settings else '' }}
+        </div>
+
+        <!-- Right: Cockpit -->
+        <div class="header-right">
+            <a href="{{ url_for('admin.admin_dashboard') }}" class="admin-link">🛠 Cockpit</a>
+        </div>
+
+    </div>
+
+    <!-- ================= SECOND ROW ================= -->
+    <div class="header-second-row">
+
+        <!-- Left: Subtitle -->
+        <div class="header-subline">
+            A Hobbyist Aircraft Database by AirTrack Solutions
+        </div>
+
+        <!-- Right: Navigation links -->
+        <div class="header-links">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('airlines.airlines_table') }}">Airlines</a>
+            <a href="{{ url_for('airlines.add_airline') }}">Add Airline</a>
+            <a href="{{ url_for('aircraft.aircraft_table') }}">Aircraft</a>
+            <a href="{{ url_for('add_aircraft.add_aircraft') }}">Add Aircraft</a>
+            <a href="{{ url_for('reports') }}">Reports</a>
+            <a href="{{ url_for('aircraft.upload_aircraft_image') }}">Upload Aircraft Image</a>
+            <a href="https://www.flightradar24.com/" target="_blank" rel="noopener noreferrer">Live Flights</a>
+            <a href="{{ url_for('admin.user_guide') }}">User Guide</a>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= TOAST NOTIFICATIONS ================= -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div id="airtrack-toast-container" aria-live="polite" aria-atomic="true">
+    {% for category, message in messages %}
+    <div class="airtrack-toast airtrack-toast-{{ category }}" role="alert">
+        <span class="airtrack-toast-message">{{ message }}</span>
+    </div>
+    {% endfor %}
+</div>
+
+<style>
+#airtrack-toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: none;
+}
+
+.airtrack-toast {
+    min-width: 280px;
+    max-width: 420px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    pointer-events: auto;
+}
+
+.airtrack-toast-success  { background: #1a7a4a; color: #fff; border-left: 4px solid #2ecc71; }
+.airtrack-toast-danger   { background: #7a1a1a; color: #fff; border-left: 4px solid #e74c3c; }
+.airtrack-toast-warning  { background: #7a5a00; color: #fff; border-left: 4px solid #f39c12; }
+.airtrack-toast-info     { background: #1a4a7a; color: #fff; border-left: 4px solid #3498db; }
+.airtrack-toast-message  { display: block; }
+</style>
+
+<script>
+(function () {
+    var toasts = document.querySelectorAll('.airtrack-toast');
+    toasts.forEach(function (toast) {
+        setTimeout(function () {
+            toast.style.opacity = '0';
+            setTimeout(function () {
+                if (toast.parentNode) toast.parentNode.removeChild(toast);
+            }, 500);
+        }, 3000);
+    });
+})();
+</script>
+{% endif %}
+{% endwith %}

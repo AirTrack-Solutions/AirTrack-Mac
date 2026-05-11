@@ -1,0 +1,87 @@
+Hi [Name],
+
+Welcome to AirTrack for Mac! Follow the steps below to get up and running.
+Your license file is attached — you'll need it in Step 3.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+STEP 1 — INSTALL DOCKER DESKTOP
+━━━━━━━━━━━━━━━━━━━━━━━
+
+AirTrack runs inside Docker. You need to install it before anything else.
+
+Download and install Docker Desktop from:
+  https://www.docker.com/products/docker-desktop/
+
+Accept all defaults during installation. When it finishes, open Docker Desktop
+and wait for it to fully start — the whale icon in your menu bar will stop
+animating when it is ready.
+
+IMPORTANT: Docker Desktop must be running whenever you use AirTrack.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+STEP 2 — INSTALL AIRTRACK
+━━━━━━━━━━━━━━━━━━━━━━━
+
+Open Terminal (press Cmd + Space, type Terminal, press Enter).
+
+Paste this single command and press Enter:
+
+  curl -fsSL https://raw.githubusercontent.com/Subhuti/AirTrack-Mac/main/setup-airtrack.sh | bash
+
+The installer will:
+  • Clone AirTrack to your computer
+  • Configure your database with a secure random password
+  • Build and start AirTrack automatically
+  • Open your browser to http://localhost:5000
+
+This may take several minutes the first time — Docker is downloading and
+building everything it needs. Please be patient.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+STEP 3 — INSTALL YOUR LICENSE
+━━━━━━━━━━━━━━━━━━━━━━━
+
+Copy the attached license.lic file into this folder:
+
+  ~/docker/AirTrack-Mac/app/config/
+
+You can open this folder in Finder by pressing Cmd + Shift + G in any
+Finder window and pasting the path above, then pressing Enter.
+
+Then restart AirTrack:
+
+  1. Run  stop.sh  in your AirTrack-Mac folder
+  2. Run  start_airtrack.sh  to start it again
+
+Refresh your browser and AirTrack will be fully licensed.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+STEP 4 — STARTING AND STOPPING
+━━━━━━━━━━━━━━━━━━━━━━━
+
+Use these scripts in your AirTrack-Mac folder:
+
+  start_airtrack.sh  — starts AirTrack and opens your browser
+  stop.sh            — stops AirTrack
+
+To run them, open Terminal, navigate to your AirTrack-Mac folder, and type:
+
+  bash start_airtrack.sh
+
+AirTrack will remember everything between restarts. Your data is safe.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+NEED HELP?
+━━━━━━━━━━━━━━━━━━━━━━━
+
+Documentation and FAQs:
+  https://www.airtracksolutions.com/faqs.html
+
+Contact us directly:
+  https://www.airtracksolutions.com/contact.html
+
+Happy spotting!
+
+Trevor
+AirTrack Solutions
+https://www.airtracksolutions.com

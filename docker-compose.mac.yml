@@ -1,0 +1,51 @@
+services:
+  airtrack:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: airtrack-mac
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app/app.py:/app/app.py
+      - ./app/config:/app/config
+      - ./app/templates:/app/templates
+      - ./app/static:/app/static
+      - ./app/routes:/app/routes
+      - ./app/utils:/app/utils
+      - ./app/models:/app/models
+      - ./app/migrations:/app/migrations
+      - ./app/woodland:/app/woodland
+      - ./app/security:/app/security
+      - app_data:/app/data
+      - logs:/app/logs
+      - backups:/app/backups
+    env_file:
+      - .env
+    depends_on:
+      airtrack-db:
+        condition: service_healthy
+    restart: unless-stopped
+  airtrack-db:
+    image: mariadb:11.4
+    container_name: airtrack-mac-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_USER: "${DB_USER}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./app/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+      - backups:/backups
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  db_data:
+  app_data:
+  logs:
+  backups:
